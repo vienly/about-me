@@ -4,6 +4,8 @@ var QA = [['What is my favorite game?', 'Dota'],
               ['Which high school did I go to?', 'Hazen'],
               ['What car do I drive?', 'Camry']];
 
+var QA7 = ['Can you guess a state I\'ve lived in besides Washington?', ['California', 'Oregon']];
+
 function greeting() {
   'use strict';
   var userName = prompt('Hello, what is your name?');
@@ -18,6 +20,7 @@ function gameTest() {
   //create a new section for logging the guessing game
   var guessGame = document.getElementById('guessing-game');
   var gameLog = document.createElement('ol');
+  var tally = document.getElementById('tally');
 
   var question;
   var ans;
@@ -63,12 +66,11 @@ function gameTest() {
     }
     console.log('User\'s input is: ' + userInput);
     if (userInput > ans) {
-      chances--;
       userInput = prompt('TOO HIGH. Guess again! ' + chances + ' left.');
     } else if (userInput < ans) {
-      chances--;
       userInput = prompt('TOO LOW. Guess again! ' + chances + ' left.');
     }
+    chances--;
   }
 
   if (chances <= 0) {
@@ -83,7 +85,44 @@ function gameTest() {
   log = document.createElement('li');
   log.appendChild(tempt);
   gameLog.appendChild(log);
+
+  //seventh question
+  question = QA7[0];
+  ans = QA7[1];
+  chances = 6;
+  var done = false;
+  console.log(question);
+  console.log(ans);
+
+  while (chances > 0 && done != true) {
+    userInput = prompt(question);
+    chances--;
+
+    for (var i = 0; i < ans.length; i++) {
+      if (userInput == ans[i]) {
+        alert('BAM');
+        tempt = document.createTextNode(question + ' ' + 'Answers: ' + ans + '. You got this right in ' + (6 - chances) + ' guesses');
+        correct++;
+        done = true;
+        break;
+      }
+    }
+  }
+
+  if (chances <= 0) {
+    alert ('You ran out of guesses :(');
+    tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans + '. You got this wrong with all 6 guesses :(');
+  }
+
+  log = document.createElement('li');
+  log.appendChild(tempt);
+  gameLog.appendChild(log);
+
   guessGame.appendChild(gameLog);
+
+  var rightGuessSummary = document.createTextNode('You have gotten ' + correct + ' answer(s) right!');
+  tally.appendChild(rightGuessSummary);
+
 }
 
 var userName = greeting();
