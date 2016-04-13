@@ -38,7 +38,7 @@ function gameTest() {
       tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans + '. You got this right!');
       correct++;
     } else {
-      alert('Nice try!');
+      alert('WRONG');
       tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans + '. You got this wrong!');
     }
 
@@ -46,7 +46,43 @@ function gameTest() {
     log.appendChild(tempt);
     gameLog.appendChild(log);
   }
-  alert('You\'ve gotten ' + correct + ' answer(s) right!');
+
+  // sixth question
+  var numberRange = 20;
+  var chances = 4;
+  userInput = 'not yet set'; // reset userInput for new question type, null for easy comparisons
+  question = ('What number am I thinking of? (1-20) 4 guesses :^)');
+  ans = Math.floor(Math.random() * numberRange);
+  console.log(question);
+  console.log(ans);
+
+  while (userInput != ans && chances > 0) {
+    while (isNaN(userInput)) {
+      console.log('User\'s input is: ' + userInput + ' is not a number');
+      userInput = prompt(question);
+    }
+    console.log('User\'s input is: ' + userInput);
+    if (userInput > ans) {
+      chances--;
+      userInput = prompt('TOO HIGH. Guess again! ' + chances + ' left.');
+    } else if (userInput < ans) {
+      chances--;
+      userInput = prompt('TOO LOW. Guess again! ' + chances + ' left.');
+    }
+  }
+
+  if (chances <= 0) {
+    alert('You ran out of guesses :^)');
+    tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans + '. You got this wrong with all 4 guesses :(');
+  } else {
+    alert('BAM');
+    tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans + '. You got this right in ' + (4 - chances) + ' guesses');
+    correct++;
+  }
+
+  log = document.createElement('li');
+  log.appendChild(tempt);
+  gameLog.appendChild(log);
   guessGame.appendChild(gameLog);
 }
 
