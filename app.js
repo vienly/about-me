@@ -1,16 +1,8 @@
-var QA = {
-  Qs: ['What is my favorite game?',
-        'What is my favorite sport?',
-        'What is my favorite food?',
-        'Which high school did I go to?',
-        'What car do I drive?'],
-
-  As: ['Dota',
-        'Soccer',
-        'Sushi',
-        'Hazen',
-        'Camry']
-};
+var QA = [['What is my favorite game?', 'Dota'],
+              ['What is my favorite sport?', 'Soccer'],
+              ['What is my favorite food?', 'Sushi'],
+              ['Which high school did I go to?', 'Hazen'],
+              ['What car do I drive?', 'Camry']];
 
 function greeting() {
   'use strict';
@@ -20,23 +12,43 @@ function greeting() {
   return userName;
 }
 
-function game() {
+function gameTest() {
   'use strict';
+
+  //create a new section for logging the guessing game
+  var guessGame = document.getElementById('guessing-game');
+  var gameLog = document.createElement('ol');
+
+  var question;
+  var ans;
   var userInput;
+  var log;
+  var tempt;
   var correct = 0;
+
   for (var i = 0; i < 5; i++) {
-    userInput = prompt(QA.Qs[i]);
-    console.log(QA.Qs[i]);
+    question = QA[i][0];
+    ans = QA[i][1];
+
+    userInput = prompt(question);
+    console.log(question);
     console.log('User\'s input is: ' + userInput);
-    if (userInput.toLowerCase() == QA.As[i].toLowerCase()) {
+    if (userInput.toLowerCase() == ans.toLowerCase()) {
       alert('BAM');
+      tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans + '. You got this right!');
       correct++;
     } else {
       alert('Nice try!');
+      tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans + '. You got this wrong!');
     }
+
+    log = document.createElement('li');
+    log.appendChild(tempt);
+    gameLog.appendChild(log);
   }
-  alert('You\'ve gotten ' + correct + ' answers right!');
+  alert('You\'ve gotten ' + correct + ' answer(s) right!');
+  guessGame.appendChild(gameLog);
 }
 
 var userName = greeting();
-game();
+gameTest();
