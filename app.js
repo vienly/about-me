@@ -29,6 +29,7 @@ function gameTest() {
   var tempt;
   var correct = 0;
 
+  //questions 1 - 5
   for (var i = 0; i < 5; i++) {
     question = QA[i][0];
     ans = QA[i][1];
