@@ -51,8 +51,8 @@ function gameTest() {
     gameLog.appendChild(log);
   }
 
-  // sixth question
-  var numberRange = 20;
+  //sixth question
+  var numberRange = 20; //change to make it more challenging
   var chances = 4;
   userInput = 'not yet set'; // reset userInput for new question type, null for easy comparisons
   question = ('What number am I thinking of? (1-20) 4 guesses :^)');
