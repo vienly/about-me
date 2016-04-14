@@ -4,7 +4,7 @@ var QA = [['What is my favorite game?', 'Dota'],
               ['Which high school did I go to?', 'Hazen'],
               ['What car do I drive?', 'Camry']];
 
-var QA7 = ['Can you guess a state I\'ve lived in besides Washington?', ['California', 'Oregon']];
+var QA7 = ['Can you guess a state I\'ve lived in besides Washington?', ['california', 'oregon']];
 
 function greeting() {
   'use strict';
@@ -96,11 +96,11 @@ function gameTest() {
   console.log(ans);
 
   while (chances > 0 && done != true) {
-    userInput = prompt(question);
+    userInput = prompt(question).toLowerCase();
     chances--;
 
     for (var i = 0; i < ans.length; i++) {
-      if (userInput == ans[i]) {
+      if (userInput == ans[i].toLowerCase()) {
         alert('BAM');
         tempt = document.createTextNode(question + ' ' + 'Answers: ' + ans + '. You got this right in ' + (6 - chances) + ' guesses');
         correct++;
