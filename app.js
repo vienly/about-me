@@ -102,7 +102,7 @@ function gameTest() {
     for (var i = 0; i < ans.length; i++) {
       if (userInput == ans[i].toLowerCase()) {
         alert('BAM');
-        tempt = document.createTextNode(question + ' ' + 'Answers: ' + ans + '. You got this right in ' + (6 - chances) + ' guesses');
+        tempt = document.createTextNode(question + ' ' + 'Answers: ' + ans.join(" and ") + '. You got this right in ' + (6 - chances) + ' guesses');
         correct++;
         done = true;
         break;
@@ -112,7 +112,7 @@ function gameTest() {
 
   if (chances <= 0) {
     alert ('You ran out of guesses :(');
-    tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans + '. You got this wrong with all 6 guesses :(');
+    tempt = document.createTextNode(question + ' ' + 'Answer: ' + ans.join(" and ") + '. You got this wrong with all 6 guesses :(');
   }
 
   log = document.createElement('li');
